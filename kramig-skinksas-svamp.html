@@ -8,31 +8,44 @@
     <script>
         function startTimer(duration, display) {
             let timer = duration, minutes, seconds;
-            setInterval(function () {
+            let interval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-                
+
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-                
+
                 display.textContent = minutes + ":" + seconds;
-                
+
                 if (--timer < 0) {
+                    clearInterval(interval);
                     display.textContent = "Klar!";
                 }
             }, 1000);
         }
-        
+
         function startCookingTimer() {
             let display = document.querySelector('#timer');
             startTimer(300, display); // 5 min timer
         }
+
+        function toggleIngredients() {
+            let ingredientsCard = document.getElementById("ingredients");
+            ingredientsCard.classList.toggle("hidden");
+        }
     </script>
 </head>
-<body class="bg-gray-900 text-white">
-    <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center mb-6">Krämig skinksås med svamp</h1>
-        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+<body class="bg-gray-900 text-white font-sans">
+    <div class="max-w-2xl mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center mb-6">Krämig skinksås med svamp</h1>
+
+        <div class="flex justify-center mb-6">
+            <img src="pasta.webp" alt="Krämig pasta" class="rounded-lg shadow-lg w-full">
+        </div>
+
+        <button onclick="toggleIngredients()" class="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded mb-4 w-full">Visa/Dölj ingredienser</button>
+
+        <div id="ingredients" class="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h2 class="text-xl font-semibold mb-4">Ingredienser</h2>
             <ul class="list-disc list-inside text-gray-400">
                 <li>400g pasta</li>
@@ -49,21 +62,21 @@
                 <li>Färsk persilja (valfritt, för garnering)</li>
             </ul>
         </div>
-        
+
         <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
             <h2 class="text-xl font-semibold mb-4">Instruktioner</h2>
-            <ol class="list-decimal list-inside text-gray-400">
-                <li>Koka pastan enligt anvisningarna på förpackningen. Spara 1 dl pastavatten.</li>
-                <li>Hetta upp en stekpanna med smör eller olja. Stek löken och vitlöken tills de blir mjuka.</li>
-                <li>Lägg i svampen och stek tills den får fin färg och vätskan kokat bort.</li>
-                <li>Tillsätt den strimlade skinkan och fräs i någon minut.</li>
-                <li>Häll i grädde, mjölk och senap. Låt sjuda i 5–7 minuter. <button onclick="startCookingTimer()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Starta timer</button> <span id="timer" class="ml-4 text-lg font-bold"></span></li>
-                <li>Blanda ner den kokta pastan i såsen. Späd eventuellt med lite pastavatten.</li>
-                <li>Smaka av med salt och peppar. Servera direkt med riven parmesan och färsk persilja.</li>
+            <ol class="list-decimal list-inside text-gray-400 space-y-2">
+                <li><input type="checkbox" class="mr-2"> Koka pastan enligt anvisningarna på förpackningen. Spara 1 dl pastavatten.</li>
+                <li><input type="checkbox" class="mr-2"> Hetta upp en stekpanna med smör eller olja. Stek löken och vitlöken tills de blir mjuka.</li>
+                <li><input type="checkbox" class="mr-2"> Lägg i svampen och stek tills den får fin färg och vätskan kokat bort.</li>
+                <li><input type="checkbox" class="mr-2"> Tillsätt den strimlade skinkan och fräs i någon minut.</li>
+                <li><input type="checkbox" class="mr-2"> Häll i grädde, mjölk och senap. Låt sjuda i 5–7 minuter. <button onclick="startCookingTimer()" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">Starta timer</button> <span id="timer" class="ml-4 text-lg font-bold"></span></li>
+                <li><input type="checkbox" class="mr-2"> Blanda ner den kokta pastan i såsen. Späd eventuellt med lite pastavatten.</li>
+                <li><input type="checkbox" class="mr-2"> Smaka av med salt och peppar. Servera direkt med riven parmesan och färsk persilja.</li>
             </ol>
         </div>
         <div class="text-center mt-6">
-            <a href="index.html" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Tillbaka till startsidan</a>
+            <a href="index.html" class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">Tillbaka till startsidan</a>
         </div>
     </div>
 </body>

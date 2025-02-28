@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasta med skinksås och svamp</title>
+    <style>
+        /* Mörkt tema */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            background-color: #121212;
+            color: #ffffff;
+            padding: 20px;
+        }
+        h1 { text-align: center; }
+        ul { list-style: none; padding: 0; }
+        li {
+            padding: 15px;
+            border: 1px solid #333;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #1e1e1e;
+            border-radius: 5px;
+        }
+        input { margin-right: 10px; }
+        button {
+            background-color: #ff9800;
+            border: none;
+            padding: 5px 10px;
+            color: black;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:disabled {
+            background-color: #555;
+            cursor: default;
+        }
+        .timer {
+            font-size: 14px;
+            margin-left: 10px;
+            color: #ff9800;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pasta med skinksås och svamp</h1>
+    <ul id="steps">
+        <!-- Stegen kommer läggas till här med JavaScript -->
+    </ul>
+
+    <script>
+        const steps = [
+            { text: "Koka pastan enligt anvisningarna på förpackningen. Spara 1 dl pastavatten.", time: 10 },
+            { text: "Hetta upp en stekpanna med smör eller olja. Stek löken och vitlöken tills de blir mjuka.", time: 3 },
+            { text: "Lägg i svampen och stek tills den får fin färg och vätskan kokat bort.", time: 5 },
+            { text: "Tillsätt den strimlade skinkan och fräs i någon minut.", time: 2 },
+            { text: "Häll i grädde, mjölk/crème fraiche och senap. Låt sjuda i 5–7 minuter.", time: 7 },
+            { text: "Blanda ner den kokta pastan i såsen. Späd eventuellt med lite pastavatten.", time: 2 },
+            { text: "Servera direkt med riven parmesan och ev. färsk persilja.", time: 0 }
+        ];
+
+        const stepsList = document.getElementById("steps");
+
+        steps.forEach((step, index) => {
+            const li = document.createElement("li");
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = "step" + index;
+
+            const label = document.createElement("label");
+            label.htmlFor = "step" + index;
+            label.textContent = step.text;
+
+            const timerDisplay = document.createElement("span");
+            timerDisplay.classList.add("timer");
+            timerDisplay.textContent = step.time > 0 ? `⏳ ${step.time}:00` : "";
+
+            const startButton = document.createElement("button");
+            startButton.textContent = "⏳ Starta timer";
+            startButton.disabled = step.time === 0;
+
+            let timer;
+            startButton.addEventListener("click", () => {
+                let timeLeft = step.time * 60;
+                startButton.disabled = true;
+
+                timer = setInterval(() => {
+                    timeLeft--;
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    timerDisplay.textContent = `⏳ ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        timerDisplay.textContent = "✅ Klar!";
+                    }
+                }, 1000);
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(label);
+            li.appendChild(startButton);
+            li.appendChild(timerDisplay);
+            stepsList.appendChild(li);
+        });
+    </script>
+
+</body>
+</html>
+

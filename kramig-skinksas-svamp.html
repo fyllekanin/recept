@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krämig skinksås med svamp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                
+                display.textContent = minutes + ":" + seconds;
+                
+                if (--timer < 0) {
+                    display.textContent = "Klar!";
+                }
+            }, 1000);
+        }
+        
+        function startCookingTimer() {
+            let display = document.querySelector('#timer');
+            startTimer(300, display); // 5 min timer
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-6">Krämig skinksås med svamp</h1>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold mb-4">Ingredienser</h2>
+            <ul class="list-disc list-inside text-gray-400">
+                <li>400g pasta</li>
+                <li>300g rökt skinka, strimlad</li>
+                <li>250g champinjoner, skivade</li>
+                <li>3 dl grädde</li>
+                <li>1 dl mjölk</li>
+                <li>1 gul lök, hackad</li>
+                <li>2 vitlöksklyftor, finhackade</li>
+                <li>1,5 msk senap</li>
+                <li>2 msk smör eller olja till stekning</li>
+                <li>Salt & peppar</li>
+                <li>1 dl riven parmesan (valfritt, för servering)</li>
+                <li>Färsk persilja (valfritt, för garnering)</li>
+            </ul>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+            <h2 class="text-xl font-semibold mb-4">Instruktioner</h2>
+            <ol class="list-decimal list-inside text-gray-400">
+                <li>Koka pastan enligt anvisningarna på förpackningen. Spara 1 dl pastavatten.</li>
+                <li>Hetta upp en stekpanna med smör eller olja. Stek löken och vitlöken tills de blir mjuka.</li>
+                <li>Lägg i svampen och stek tills den får fin färg och vätskan kokat bort.</li>
+                <li>Tillsätt den strimlade skinkan och fräs i någon minut.</li>
+                <li>Häll i grädde, mjölk och senap. Låt sjuda i 5–7 minuter. <button onclick="startCookingTimer()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Starta timer</button> <span id="timer" class="ml-4 text-lg font-bold"></span></li>
+                <li>Blanda ner den kokta pastan i såsen. Späd eventuellt med lite pastavatten.</li>
+                <li>Smaka av med salt och peppar. Servera direkt med riven parmesan och färsk persilja.</li>
+            </ol>
+        </div>
+        <div class="text-center mt-6">
+            <a href="index.html" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Tillbaka till startsidan</a>
+        </div>
+    </div>
+</body>
+</html>

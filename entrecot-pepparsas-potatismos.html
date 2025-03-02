@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrecôte med pepparsås och potatismos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            let interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "Klar!";
+                }
+            }, 1000);
+        }
+
+        function startCookingTimer(duration) {
+            let display = document.querySelector('#timer');
+            startTimer(duration, display);
+        }
+
+        function toggleIngredients() {
+            let ingredientsCard = document.getElementById("ingredients");
+            ingredientsCard.classList.toggle("hidden");
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <div class="max-w-2xl mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center mb-6">Entrecôte med pepparsås och potatismos</h1>
+
+        <div class="flex justify-center mb-6">
+            <img src="entrecote.webp" alt="Entrecôte med pepparsås" class="rounded-lg shadow-lg w-full">
+        </div>
+
+        <button onclick="toggleIngredients()" class="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded mb-4 w-full">Visa/Dölj ingredienser</button>
+
+        <div id="ingredients" class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-semibold mb-4">Ingredienser (4 portioner)</h2>
+
+            <h3 class="text-lg font-semibold">Entrecôte</h3>
+            <ul class="list-disc list-inside text-gray-400 mb-4">
+                <li>4 skivor entrecôte (ca 150–200 g per person)</li>
+                <li>1 msk smör</li>
+                <li>1 msk rapsolja</li>
+                <li>Salt och svartpeppar</li>
+            </ul>
+
+            <h3 class="text-lg font-semibold">Pepparsås</h3>
+            <ul class="list-disc list-inside text-gray-400 mb-4">
+                <li>2 dl grädde</li>
+                <li>1 dl mjölk</li>
+                <li>1 msk smör</li>
+                <li>2 tsk krossad svartpeppar</li>
+                <li>1 tsk krossad grönpeppar (valfritt)</li>
+                <li>1 tsk dijonsenap</li>
+                <li>1 tsk soja</li>
+                <li>1 tsk majsstärkelse (valfritt)</li>
+            </ul>
+
+            <h3 class="text-lg font-semibold">Potatismos</h3>
+            <ul class="list-disc list-inside text-gray-400">
+                <li>800 g potatis (gärna mjölig sort)</li>
+                <li>1 dl mjölk</li>
+                <li>50 g smör</li>
+                <li>Salt och vitpeppar</li>
+                <li>1 krm riven muskotnöt (valfritt)</li>
+            </ul>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+            <h2 class="text-xl font-semibold mb-4">Instruktioner</h2>
+
+            <h3 class="text-lg font-semibold">Potatismos</h3>
+            <ol class="list-decimal list-inside text-gray-400 space-y-2 mb-4">
+                <li><input type="checkbox" class="mr-2"> Skala och koka potatisen i lättsaltat vatten tills den är mjuk (ca 15–20 min).</li>
+                <li><input type="checkbox" class="mr-2"> Häll av vattnet och mosa potatisen.</li>
+                <li><input type="checkbox" class="mr-2"> Tillsätt smör och värmd mjölk. Vispa moset luftigt och smaka av med salt, vitpeppar och ev. muskotnöt.</li>
+            </ol>
+
+            <h3 class="text-lg font-semibold">Pepparsås</h3>
+            <ol class="list-decimal list-inside text-gray-400 space-y-2 mb-4">
+                <li><input type="checkbox" class="mr-2"> Smält smöret i en kastrull. Tillsätt krossad peppar och låt fräsa kort.</li>
+                <li><input type="checkbox" class="mr-2"> Häll i grädde, mjölk, dijonsenap och soja. Låt sjuda i 5–10 minuter.</li>
+                <li><input type="checkbox" class="mr-2"> Red såsen med lite majsstärkelse om den är för tunn. Smaka av.</li>
+            </ol>
+
+            <h3 class="text-lg font-semibold">Entrecôte</h3>
+            <ol class="list-decimal list-inside text-gray-400 space-y-2">
+                <li><input type="checkbox" class="mr-2"> Ta ut köttet i rumstemperatur ca 30 min före tillagning.</li>
+                <li><input type="checkbox" class="mr-2"> Hetta upp smör och olja i en stekpanna på hög värme.</li>
+                <li><input type="checkbox" class="mr-2"> Salta och peppra köttet, stek ca 2–3 min per sida för medium.</li>
+                <li><input type="checkbox" class="mr-2"> Låt vila några minuter före servering.</li>
+            </ol>
+        </div>
+
+        <div class="text-center mt-6">
+            <a href="index.html" class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">Tillbaka till startsidan</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Toscakaka Recept</title>
+  <style>
+    :root {
+      --bg: #1e1e1e;
+      --card: #2b2b2b;
+      --text: #f4f4f4;
+      --accent: #d88c4c;
+      --accent-dark: #c67438;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: var(--accent);
+      color: #1e1e1e;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    h2, h3 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    ul, ol {
+      line-height: 1.6;
+      padding-left: 1.2rem;
+    }
+
+    li + li {
+      margin-top: 0.5rem;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .timer span {
+      font-weight: bold;
+      font-size: 1.1rem;
+      background: #111;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #444;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    button {
+      background-color: var(--accent);
+      border: none;
+      color: #1e1e1e;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--accent-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .timer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Toscakaka</h1>
+    <p>Klassisk svensk kaka med knäckigt mandeltäcke</p>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2>Ingredienser</h2>
+      <h3>Botten</h3>
+      <ul>
+        <li>100 g smör</li>
+        <li>2 ägg</li>
+        <li>2 dl strösocker</li>
+        <li>1,5 dl vetemjöl</li>
+        <li>1 tsk bakpulver</li>
+        <li>2 msk mjölk</li>
+      </ul>
+      <h3>Toscatäcke</h3>
+      <ul>
+        <li>75 g smör</li>
+        <li>1 dl strösocker</li>
+        <li>2 msk vetemjöl</li>
+        <li>2 msk mjölk</li>
+        <li>100 g flagad mandel</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Instruktioner</h2>
+      <ol>
+        <li>Sätt ugnen på 175°C.</li>
+        <li>Smält smöret till botten och låt det svalna något.</li>
+        <li>Vispa ägg och socker pösigt. Rör ner smöret.</li>
+        <li>Vänd ner mjöl och bakpulver, tillsätt mjölken.</li>
+        <li>Häll i en smord och bröad form (22–24 cm).</li>
+        <li>Grädda i nedre delen av ugnen i <strong>20 minuter</strong>.</li>
+      </ol>
+      <div class="timer">
+        <span id="bake-timer">00:00</span>
+        <button onclick="startTimer('bake-timer', 20)">Starta 20 min timer</button>
+      </div>
+
+      <ol start="7">
+        <li>Blanda alla ingredienser till toscatäcket i en kastrull. Låt sjuda under omrörning tills det tjocknar (ca 5 minuter).</li>
+      </ol>
+      <div class="timer">
+        <span id="topping-timer">00:00</span>
+        <button onclick="startTimer('topping-timer', 5)">Starta 5 min timer</button>
+      </div>
+
+      <ol start="8">
+        <li>Ta ut kakan och bred över toscasmeten.</li>
+        <li>Grädda i mitten av ugnen i <strong>15 minuter</strong> tills ytan är gyllene och bubblar.</li>
+      </ol>
+      <div class="timer">
+        <span id="final-bake-timer">00:00</span>
+        <button onclick="startTimer('final-bake-timer', 15)">Starta 15 min timer</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 – Toscakaka deluxe • Alla rättigheter förbehållna
+  </footer>
+
+  <script>
+    function startTimer(id, minutes) {
+      const display = document.getElementById(id);
+      let time = minutes * 60;
+
+      function update() {
+        const min = Math.floor(time / 60);
+        const sec = time % 60;
+        display.textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+        if (time > 0) {
+          time--;
+        } else {
+          clearInterval(interval);
+          alert("🎉 Timer klar för: " + id.replace(/-/g, ' ') + "!");
+        }
+      }
+
+      update();
+      const interval = setInterval(update, 1000);
+    }
+  </script>
+</body>
+</html>
